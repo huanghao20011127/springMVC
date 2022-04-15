@@ -12,7 +12,7 @@ public class HelloWorldController {
 
     @RequestMapping("/")
     public String index(){
-        return "index删除Pull";
+        return "index";
     }
 
     @RequestMapping("/helloWorld")
