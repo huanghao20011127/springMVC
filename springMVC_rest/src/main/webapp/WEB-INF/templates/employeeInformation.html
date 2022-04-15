@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>employeeInformation</title>
+</head>
+<body>
+    <table border="1" cellpadding="0" cellspacing="0" style="text-align: center;" id="dataTable">
+        <tr>
+            <th colspan="5">employeesInformation</th>
+        </tr>
+        <tr>
+            <th>id</th>
+            <th>lastName</th>
+            <th>email</th>
+            <th>gender</th>
+            <th>option(<a th:href="@{/add}">add</a>)</th>
+        </tr>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td>
+                <a th:href="@{'/employee/' + ${employee.id}}" onclick="tos()">delete</a>
+                <a th:href="@{'/employee/' + ${employee.id}}">update</a>
+            </td>
+        </tr>
+    </table>
+    <form method="post" id="deleteform">
+        <input type="hidden" name="_method" value="delete"/>
+    </form>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script th:src="@{/js/jquery-3.3.1.js}"></script>
+    <script>
+        function tos(){
+            var event = this.event;
+            var href = event.target.href;
+            $("#deleteform").attr("action",href);
+            $("#deleteform").submit();
+            event.preventDefault();
+        }
+    </script>
+</body>
+</html>
